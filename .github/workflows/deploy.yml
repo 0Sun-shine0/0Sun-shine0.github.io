@@ -1,0 +1,42 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 仓库里的 .npmrc 是给本地开发用的（国内镜像 + 项目内缓存目录）。
+      # CI 在境外，必须换成官方源，否则会去访问国内镜像、慢或直接失败。
+      - name: 换成本地以外的 npm 配置
+        run: |
+          printf 'registry=https://registry.npmjs.org/\nfund=false\naudit=false\nprogress=false\n' > .npmrc
+
+      - name: 安装依赖、构建、上传站点
+        uses: withastro/action@v6
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

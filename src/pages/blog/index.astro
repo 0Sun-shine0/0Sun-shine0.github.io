@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { fmtDate } from '../../data/site';
+
+const mods = import.meta.glob('../../posts/*.md', { eager: true }) as Record<string, any>;
+const posts = Object.entries(mods)
+  .map(([path, m]) => {
+    const fm = m.frontmatter ?? {};
+    return {
+      slug: path.split('/').pop()!.replace(/\.md$/, ''),
+      title: fm.title ?? '',
+      description: fm.description ?? '',
+      date: fm.date ?? '',
+      tags: fm.tags ?? [],
+      minutes: fm.minutes,
+    };
+  })
+  .sort((a, b) => +new Date(b.date) - +new Date(a.date));
+
+const allTags = [...new Set(posts.flatMap((p) => p.tags))];
+---
+<BaseLayout
+  title="笔记"
+  description="颐安写桌面工具和自动化时踩过的坑：桌面开发、打包发布、数据可靠性。"
+>
+  <section class="page-head">
+    <div class="wrap stack gap-sm">
+      <nav class="crumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">/</span><span class="faint">文章</span></nav>
+        <span class="eyebrow">笔记</span>
+        <h1>{posts.length} 篇，都是做东西时真撞上的问题</h1>
+        <p class="lead">
+          不想写成「从零开始」教程。这里只有我在折腾桌面工具和自动化时踩过的坑：当时是怎么找到问题的，怎么解决的，以及下次会不会又栽进去。
+      </p>
+      <div class="meta-row" style="margin-top:.6rem">
+        {allTags.map((t) => <span class="tag">{t}</span>)}
+        <a class="mono" href="/rss.xml" style="margin-left:.4rem"><Icon name="rss" size={14} /> RSS 订阅</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="list" data-reveal>
+        {posts.map((post) => (
+          <div class="list__item">
+            <a class="list__link" href={`/blog/${post.slug}/`}>
+              <span class="list__date">{fmtDate(post.date)}</span>
+              <span>
+                <span class="list__title">{post.title}</span>
+                <span class="list__desc">{post.description}</span>
+              </span>
+              <span class="list__arrow" aria-hidden="true"><Icon name="arrow" size={18} /></span>
+            </a>
+          </div>
+        ))}
+      </div>
+      {posts.length === 0 ? <p class="muted">还没有文章，去 <code>src/posts/</code> 新建一个 .md 文件就会出现在这里。</p> : null}
+    </div>
+  </section>
+</BaseLayout>

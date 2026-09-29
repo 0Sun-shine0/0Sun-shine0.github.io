@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { site, contacts } from '../data/site';
+
+const timeline = [
+  { when: '2026-09', what: '小爪助手 v2.4（还在改）', desc: '我主导做的桌面工具，两周提交了 88 次。现在主要在收尾安装和自动更新。' },
+  { when: '2026-09', what: '重构 T2Video', desc: '把单文件拆成 8 个模块，补上测试，也清掉几处原来没真正起作用的检查。' },
+  { when: '2026-05', what: '试做 Reasonix GUI', desc: '给命令行工具做了个 Electron 界面，主体 3 天。做完发现多开一个窗口并不等于更顺手。' },
+  { when: '2026-02', what: '给旧项目补上版本控制', desc: '把 2024 年写的 T2Video 整理后传上 GitHub。同期还写过 C 盘清理脚本和几段 R 统计实验。' },
+  { when: '2024-06', what: '第一次让程序操作电脑', desc: '做了个会看屏幕、点鼠标、敲键盘的桌面操作员。它让我第一次认真想「人为什么愿意把操作交出去」。' },
+  { when: '2024', what: '开始做文生视频', desc: 'T2Video-DCOT 动笔。当时没用 git，代码在本地放了两年。' },
+];
+
+const concerns = [
+  '<b>安装门槛</b>：双击、下一步、完成。别让人先装 Python，也别搞什么申请密钥。安装绝对不能成为第一道门槛。',
+  '<b>权限分级</b>：平时干点杂活就别弹窗烦人了，但涉及装代码和跑高风险命令，必须让我确认。得把好钢用在刀刃上。',
+  '<b>成本控制</b>：能少截一张图、少发一段废话，就顺手做了。别总想着「以后再优化」，很多时候就没有以后了。',
+  '<b>数据归属</b>：本地优先，写盘要有备份，导入导出的逻辑得盘清楚。卸载的时候默认不删数据，这也是底线。',
+];
+---
+<BaseLayout
+  title="关于"
+  description="颐安的个人网站。小爪助手、T2Video 这些项目，以及做它们时卡住的地方。"
+>
+  <section class="page-head">
+    <div class="wrap stack gap-sm">
+      <nav class="crumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">/</span><span class="faint">关于</span></nav>
+      <span class="eyebrow">关于</span>
+      <h1>我是颐安</h1>
+      <p class="lead">
+        在武汉，平时用 Python 写桌面工具，最近在学 AI Agent。
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap two-col">
+      <div class="article">
+        <div class="about-head">
+          <div class="avatar" aria-hidden="true">{site.initials}</div>
+          <div class="stack gap-xs">
+            <span class="mono faint">{site.location} · {site.status}</span>
+            <p style="margin:0">
+              小爪助手是我主导做的项目，也是学 Agent 时拿来练手的；另外做过桌面操作、
+              Electron 界面和文生视频。
+            </p>
+          </div>
+        </div>
+
+        <h2>怎么走到这些项目上的</h2>
+        <p>
+          2024 年我做了个让程序替我操作电脑的项目：DeepSeek 拆任务，CNN 看屏幕，PyAutoGUI 点鼠标敲键盘。
+          那时候我以为难点是「模型看不看得懂屏幕」。
+        </p>
+        <p>
+          做完才发现不是。真正卡住我的是另一个问题：用户凭什么敢把键鼠交出去。
+          识别得再准，只要用户不肯按「允许」，这东西就只能待在自己机器上。
+        </p>
+        <p>
+          这个念头一直留着。做小爪助手的时候，它变成了很具体的东西 —— 权限怎么分级、审批卡片弹在哪、哪些动作永远要问；
+          再往后又碰上数据丢失、安装门槛、模型成本这些事。
+        </p>
+        <p>
+          所以现在做东西，我得两头兼顾：一边看模型能力到底能撑多大，一边还得保证工具本身不给我掉链子。
+        </p>
+
+        <h2>最近更在意的事</h2>
+        <ul>
+          {concerns.map((t) => <li set:html={t}></li>)}
+        </ul>
+
+        <h2>还没做过什么</h2>
+        <p>
+          我不写 Rust；前端的 React 只到「能拼出界面、调通 IPC」的程度，做不了精致的视觉设计 ——
+          小爪的界面是靠 QML 一点点调到顺眼的；我没做过高并发分布式系统，我的项目基本都是单机工具；
+          R 只是拿来跑统计脚本，不是研究用的水平。
+        </p>
+        <p>
+          所以如果要聊，Agent 工具调用、桌面端实现、权限边界和 Windows 打包会更对路。
+        </p>
+
+        <div class="callout">
+          <span aria-hidden="true"><Icon name="spark" size={18} /></span>
+          <div>
+            <b>一个现在的习惯</b><br />
+            动手之前先问「用户第一次打开会卡在哪」，再决定加什么。小爪助手里好几个功能就是这么做着做着被砍掉的。
+          </div>
+        </div>
+
+        <h2>这个站会放什么</h2>
+        <p>          主要还是记项目，以及做的时候撞上的问题 —— 包括做完回头看，发现当初判断错的地方。
+          不写教程，功能列表也懒得列全。
+        </p>
+      </div>
+
+      <aside class="side">
+        <div class="card">
+          <span class="eyebrow">时间线</span>
+          <div class="timeline" style="margin-top:1.2rem">
+            {timeline.map((t) => (
+              <div class="timeline__item">
+                <span class="timeline__when">{t.when}</span>
+                <div class="timeline__what">{t.what}</div>
+                <div class="timeline__desc">{t.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="eyebrow">联系我</span>
+          <p style="margin:.7rem 0 1rem">
+            邮箱、微信、QQ 都可以，我基本当天回；GitHub 上的 Issue 也会看。
+            点一下就是复制。
+          </p>
+          <div class="stack gap-sm">
+            <a class="btn btn--sm" href={site.github} target="_blank" rel="me noopener">
+              <Icon name="github" size={14} />@0Sun-shine0
+            </a>
+            {contacts.map((c) => (
+              <button class="btn btn--sm" type="button" data-copy={c.value} title={`点击复制${c.label}`}>
+                <Icon name={c.icon} size={14} />{c.label}：{c.value}
+              </button>
+            ))}
+          </div>
+          <p class="mono faint" style="margin:1rem 0 0">常驻 {site.location}</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
