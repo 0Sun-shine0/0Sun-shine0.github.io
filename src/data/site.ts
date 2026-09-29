@@ -17,7 +17,7 @@ export const site = {
   qq: '920422927',
   wechat: 'M2XWYMM',
   github: 'https://github.com/0Sun-shine0',
-  status: '最近在给小爪助手补自动更新',
+  status: '最近在做小爪的自动更新',
 };
 
 // 联系方式：页面上的复制按钮和「联系我」卡片都用这一份，改一处即可
