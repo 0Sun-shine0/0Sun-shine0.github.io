@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>测试怎么写才不花 API 钱 · 颐安</title><meta name="description" content="我做的项目几乎全依赖外部接口 —— 语言模型、视觉生成、视频合成。跑一次全量测试要烧掉几十块。后来用了三层替身，现在本地跑 294 个用例，一分钱不花。"><link rel="canonical" href="https://0sun-shine0.github.io/blog/api-cost-zero-tests/"><meta name="generator" content="Astro v7.3.5"><meta name="theme-color" content="#08080c"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" title="颐安 的文章" href="/rss.xml"><meta property="og:type" content="article"><meta property="og:title" content="测试怎么写才不花 API 钱 · 颐安"><meta property="og:description" content="我做的项目几乎全依赖外部接口 —— 语言模型、视觉生成、视频合成。跑一次全量测试要烧掉几十块。后来用了三层替身，现在本地跑 294 个用例，一分钱不花。"><meta property="og:url" content="https://0sun-shine0.github.io/blog/api-cost-zero-tests/"><meta property="og:image" content="https://0sun-shine0.github.io/og-cover.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="颐安 — 做出来的东西都真的能跑"><meta property="og:locale" content="zh_CN"><meta property="og:site_name" content="颐安"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://0sun-shine0.github.io/og-cover.png"><meta name="twitter:title" content="测试怎么写才不花 API 钱 · 颐安"><meta name="twitter:description" content="我做的项目几乎全依赖外部接口 —— 语言模型、视觉生成、视频合成。跑一次全量测试要烧掉几十块。后来用了三层替身，现在本地跑 294 个用例，一分钱不花。"><!-- 首屏前定主题，避免闪白 --><script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var light = window.matchMedia('(prefers-color-scheme: light)').matches;
+          document.documentElement.setAttribute('data-theme', saved || (light ? 'light' : 'dark'));
+        } catch (e) {}
+      })();
+    </script><link rel="stylesheet" href="/_astro/BaseLayout.US0QA2ov.css"></head><body data-progress><a class="skip-link" href="#main">跳到主要内容</a><header class="nav"><div class="wrap nav__inner"><a class="brand" href="/" aria-label="颐安 首页"><span class="brand__mark">YA</span><span class="brand__text">颐安 <span class="faint">·</span> AI</span></a><nav class="nav__links" aria-label="主导航"><a class="nav__link" href="/projects" data-nav="作品">作品</a><a class="nav__link" href="/blog" data-nav="笔记" aria-current="page">笔记</a><a class="nav__link" href="/about" data-nav="关于">关于</a><a class="nav__link" href="/now" data-nav="现在">现在</a><a class="nav__link" href="/uses" data-nav="装备">装备</a></nav><div class="nav__actions"><button class="icon-btn" type="button" data-theme-toggle aria-label="切换深浅色模式" title="切换深浅色模式"><svg class="ico-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.3M12 19.1v2.3M2.6 12h2.3M19.1 12h2.3M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3L17 7M7 17l-1.7 1.7"/></svg><svg class="ico-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.4A8.5 8.5 0 0 1 9.6 3.8a8.5 8.5 0 1 0 10.6 10.6z"/></svg></button><button class="icon-btn nav__burger" type="button" data-burger aria-label="打开菜单" aria-expanded="false" aria-controls="nav-drawer"><svg class width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 7h16.8M3.6 12h16.8M3.6 17h16.8"/></svg></button></div></div><div class="nav__drawer" id="nav-drawer"><div class="wrap"><ul><li><a href="/">首页</a></li><li><a href="/projects">作品</a></li><li><a href="/blog" aria-current="page">笔记</a></li><li><a href="/about">关于</a></li><li><a href="/now">现在</a></li><li><a href="/uses">装备</a></li></ul></div></div></header><main id="main"><div class="wrap" style="padding-top:clamp(6.6rem,14vw,8.6rem)"><nav class="crumb" aria-label="面包屑"><a href="/">首页</a><span aria-hidden="true">/</span><a href="/blog">文章</a><span aria-hidden="true">/</span><span class="faint">测试怎么写才不花 API 钱</span></nav><div class="two-col"><article class="article"><header class="stack gap-sm" style="margin-bottom:2.2rem"><h1 style="font-size:clamp(1.85rem,4.2vw,2.85rem)">测试怎么写才不花 API 钱</h1><p class="lead" style="margin:0">我做的项目几乎全依赖外部接口 —— 语言模型、视觉生成、视频合成。跑一次全量测试要烧掉几十块。后来用了三层替身，现在本地跑 294 个用例，一分钱不花。</p><div class="meta-row"><time datetime="2025-05-18" class="mono">2025-05-18</time><span class="mono inline-meta"><svg class width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.4V12l3.2 2"/></svg>10 分钟</span><span class="tag">测试</span><span class="tag">Python</span><span class="tag">工程实践</span></div></header><p>我有一个依赖外部接口的项目（语言模型 + 视觉生成 API），跑一次完整的端到端验证大概要花几十块。</p>
+<p>这带来一个很实际的后果：<strong>我会不自觉地少跑测试。</strong></p>
+<ul>
+<li>改了一行提示词拼装逻辑，心想「这个不用整个跑一遍吧」</li>
+<li>想着只测自己改的那部分，跳过不相关的</li>
+<li>更糟的是，有时候会「先推上去，回头再说」</li>
+</ul>
+<p>这不是意志力问题，是成本问题。只要测试有代价，人就会绕开它。</p>
+<p>后来我把测试拆成三层替身，现在本地跑 <strong>294 个用例、一分钱不花、一遍十几秒</strong>。下面是具体做法。</p>
+<h2 id="第一层伪造-http-层">第一层：伪造 HTTP 层</h2>
+<p>最外层的替身是<strong>网络请求本身</strong>。我不用 mock 库，而是手写两个小类 —— 因为我要控制的是「这次调用返回什么」，而不是「函数被调了几次」。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> FakeResponse</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#79B8FF"> __init__</span><span style="color:#E1E4E8">(self, status_code</span><span style="color:#F97583">=</span><span style="color:#79B8FF">200</span><span style="color:#E1E4E8">, payload</span><span style="color:#F97583">=</span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">, text</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">""</span><span style="color:#E1E4E8">, chunks</span><span style="color:#F97583">=</span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.status_code </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> status_code</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">._payload </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> payload</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.text </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> text </span><span style="color:#F97583">if</span><span style="color:#E1E4E8"> text </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> (json.dumps(payload) </span><span style="color:#F97583">if</span><span style="color:#E1E4E8"> payload </span><span style="color:#F97583">is</span><span style="color:#F97583"> not</span><span style="color:#79B8FF"> None</span><span style="color:#F97583"> else</span><span style="color:#9ECBFF"> ""</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.headers </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> {</span><span style="color:#9ECBFF">"content-length"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">sum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">len</span><span style="color:#E1E4E8">(c) </span><span style="color:#F97583">for</span><span style="color:#E1E4E8"> c </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> (chunks </span><span style="color:#F97583">or</span><span style="color:#E1E4E8"> [])))}</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">._chunks </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> chunks </span><span style="color:#F97583">or</span><span style="color:#E1E4E8"> []</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> json</span><span style="color:#E1E4E8">(self):</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">._payload </span><span style="color:#F97583">is</span><span style="color:#79B8FF"> None</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">            raise</span><span style="color:#79B8FF"> ValueError</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"no json"</span><span style="color:#E1E4E8">)     </span><span style="color:#6A737D"># 模拟不是 JSON 的响应</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">._payload</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> raise_for_status</span><span style="color:#E1E4E8">(self):</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.status_code </span><span style="color:#F97583">&gt;=</span><span style="color:#79B8FF"> 400</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">            raise</span><span style="color:#E1E4E8"> requests.HTTPError(</span><span style="color:#F97583">f</span><span style="color:#9ECBFF">"HTTP </span><span style="color:#79B8FF">{self</span><span style="color:#E1E4E8">.status_code</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> iter_content</span><span style="color:#E1E4E8">(self, chunk_size</span><span style="color:#F97583">=</span><span style="color:#79B8FF">8192</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#F97583">        yield from</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">._chunks             </span><span style="color:#6A737D"># 流式下载</span></span></code></pre>
+<p>关键在 <code>FakeSession</code> —— 它<strong>按顺序返回预设响应，并记录每次调用的参数</strong>：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> FakeSession</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#79B8FF"> __init__</span><span style="color:#E1E4E8">(self, responses</span><span style="color:#F97583">=</span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">, exception</span><span style="color:#F97583">=</span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.responses </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> list</span><span style="color:#E1E4E8">(responses </span><span style="color:#F97583">or</span><span style="color:#E1E4E8"> [])</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.exception </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> exception</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.calls </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> []                     </span><span style="color:#6A737D"># 每次调用的 (方法, URL, 参数)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> post</span><span style="color:#E1E4E8">(self, url, </span><span style="color:#F97583">**</span><span style="color:#E1E4E8">kwargs):</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.calls.append((</span><span style="color:#9ECBFF">"POST"</span><span style="color:#E1E4E8">, url, kwargs))</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">._next()</span></span></code></pre>
+<p>这样我既能<strong>喂</strong>各种响应（200 / 429 / 500 / 不是 JSON / 空 body），也能<strong>查</strong>请求发对了没有：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> test_retries_on_429</span><span style="color:#E1E4E8">():</span></span>
+<span class="line"><span style="color:#E1E4E8">    session </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> FakeSession([</span></span>
+<span class="line"><span style="color:#E1E4E8">        FakeResponse(</span><span style="color:#79B8FF">429</span><span style="color:#E1E4E8">),                  </span><span style="color:#6A737D"># 第一次：限流</span></span>
+<span class="line"><span style="color:#E1E4E8">        FakeResponse(</span><span style="color:#79B8FF">200</span><span style="color:#E1E4E8">, {</span><span style="color:#9ECBFF">"ok"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">True</span><span style="color:#E1E4E8">}),    </span><span style="color:#6A737D"># 第二次：成功</span></span>
+<span class="line"><span style="color:#E1E4E8">    ])</span></span>
+<span class="line"><span style="color:#E1E4E8">    result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> call_api(</span><span style="color:#FFAB70">session</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">session)</span></span>
+<span class="line"><span style="color:#F97583">    assert</span><span style="color:#E1E4E8"> result[</span><span style="color:#9ECBFF">"ok"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">is</span><span style="color:#79B8FF"> True</span></span>
+<span class="line"><span style="color:#F97583">    assert</span><span style="color:#79B8FF"> len</span><span style="color:#E1E4E8">(session.calls) </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 2</span><span style="color:#6A737D">          # 确认重试了一次</span></span></code></pre>
+<p><strong>「按顺序返回」这件小事很关键。</strong> 很多 bug 只在特定顺序下出现 —— 第一次成功、第二次限流、第三次超时。如果替身只能「永远返回同一个响应」，这类 bug 就测不出来。</p>
+<h2 id="第二层合成素材">第二层：合成素材</h2>
+<p>第二层替身是<strong>输入文件</strong>。项目要处理图像和视频，而真实素材是用户传的，不方便进仓库、也可能很大。</p>
+<p>所以我<strong>先生成素材</strong>：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> checkerboard</span><span style="color:#E1E4E8">(size</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">180</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">320</span><span style="color:#E1E4E8">), block</span><span style="color:#F97583">=</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">, low</span><span style="color:#F97583">=</span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">, high</span><span style="color:#F97583">=</span><span style="color:#79B8FF">225</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#9ECBFF">    """高对比度棋盘格：结构明显，拉普拉斯方差大。"""</span></span>
+<span class="line"><span style="color:#E1E4E8">    height, width </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> size</span></span>
+<span class="line"><span style="color:#E1E4E8">    ys, xs </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> np.mgrid[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">:height, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">:width]</span></span>
+<span class="line"><span style="color:#E1E4E8">    pattern </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ((xs </span><span style="color:#F97583">//</span><span style="color:#E1E4E8"> block) </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> (ys </span><span style="color:#F97583">//</span><span style="color:#E1E4E8"> block)) </span><span style="color:#F97583">%</span><span style="color:#79B8FF"> 2</span><span style="color:#F97583"> ==</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#E1E4E8">    image </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> np.where(pattern, high, low).astype(np.uint8)</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> np.repeat(image[:, :, </span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">], </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">axis</span><span style="color:#F97583">=</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> ball_frames</span><span style="color:#E1E4E8">(count</span><span style="color:#F97583">=</span><span style="color:#79B8FF">12</span><span style="color:#E1E4E8">, size</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">180</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">320</span><span style="color:#E1E4E8">), background</span><span style="color:#F97583">=</span><span style="color:#79B8FF">40</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#9ECBFF">    """小球横向移动，光流幅值明显。"""</span></span>
+<span class="line"><span style="color:#E1E4E8">    frames </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> []</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> index </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> range</span><span style="color:#E1E4E8">(count):</span></span>
+<span class="line"><span style="color:#E1E4E8">        frame </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> solid((background, background, background), size)</span></span>
+<span class="line"><span style="color:#E1E4E8">        cv2.circle(frame, (</span><span style="color:#79B8FF">20</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> index </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> 20</span><span style="color:#E1E4E8">, height </span><span style="color:#F97583">//</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">), </span><span style="color:#79B8FF">15</span><span style="color:#E1E4E8">, (</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">230</span><span style="color:#E1E4E8">), </span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        frames.append(frame)</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> frames</span></span></code></pre>
+<p><strong>每个素材都有明确的物理含义</strong>，这样断言才有意义：</p>
+<table>
+<thead>
+<tr>
+<th>素材</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>棋盘格</td>
+<td>细节丰富  清晰度指标应该给高分</td>
+</tr>
+<tr>
+<td>纯色</td>
+<td>完全空白  清晰度指标应该给 0</td>
+</tr>
+<tr>
+<td>小球移动</td>
+<td>明显运动  光流幅值应该大于阈值</td>
+</tr>
+<tr>
+<td>整段静止</td>
+<td>冻住  光流幅值应该接近 0</td>
+</tr>
+<tr>
+<td>噪点视频</td>
+<td>帧间剧烈变化  帧间跳变应该报警</td>
+</tr>
+</tbody>
+</table>
+<p>这就是我为什么坚持<strong>自己生成而不是找样例文件</strong>：我需要的是<strong>已知答案</strong>的素材，而不是好看的素材。</p>
+<p>比如「清晰度指标对不对」这个问题，用真实照片测不出来 —— 我不知道那张照片「应该」得多少分。但棋盘格该得高分、纯色该得 0，这两条是确定的。</p>
+<h2 id="第三层确定性">第三层：确定性</h2>
+<p>前两层解决了「不花钱」，第三层解决「测得准」。</p>
+<p><strong>问题是：随机性会毁掉测试。</strong></p>
+<ul>
+<li>生成素材时用了随机噪声 —— 每次跑结果不同 —— 断言时松时紧</li>
+<li>视频编码器（H.264/H.265）是有损的 —— 同一份帧写出去再读回来，像素不完全一致</li>
+<li>浮点运算在不同平台上有微小差异</li>
+</ul>
+<p>所以素材生成必须<strong>完全确定</strong>：不用 <code>np.random</code>，所有图案都由坐标算出来；阈值留足余量，不贴边。</p>
+<p>举个例子，我有一处判断「画面细节强度」的实现，阈值定在 1.0。测试里的素材得分是：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>纯色      0.00  →  应该被拦下（余量 1.0）</span></span>
+<span class="line"><span>平滑渐变  1.25  →  应该通过（余量 0.25）</span></span></code></pre>
+<p>渐变的 1.25 距阈值只有 0.25，<strong>这个余量太薄</strong>。视频编码器的微小差异就可能让它在 0.98 和 1.31 之间浮动，测试会变成薛定谔的。</p>
+<p>所以我改用**棋盘格（91）和留白构图（56）**这类余量充足的素材测「应该通过」，纯色（0.00）测「应该拦下」。渐变只用来验证「平滑画面得分低」，不做阈值边界的断言。</p>
+<p><strong>「用余量充足的素材测边界」是这层最重要的经验。</strong></p>
+<h2 id="三层叠起来之后">三层叠起来之后</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>之前</th>
+<th>现在</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单次全量测试成本</td>
+<td>几十元</td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>耗时</td>
+<td>几分钟（等接口）</td>
+<td><strong>十几秒</strong></td>
+</tr>
+<tr>
+<td>能测的异常</td>
+<td>只有真实遇到的</td>
+<td>429 / 500 / 超时 / 非 JSON / 空响应，都能造</td>
+</tr>
+<tr>
+<td>敢不敢频繁跑</td>
+<td>不敢</td>
+<td>每次改完就跑</td>
+</tr>
+</tbody>
+</table>
+<p>最后一行是最重要的变化。<strong>测试的价值不在「覆盖率」，而在「你敢不敢随时跑它」。</strong></p>
+<p>一个每次跑都要心疼一下的测试套件，实际覆盖率会无限趋近于零 —— 因为你不会跑它。</p>
+<h2 id="两个可能被质疑的点">两个可能被质疑的点</h2>
+<p><strong>一、「你测的是替身，不是真实接口，有意义吗？」</strong></p>
+<p>有意义，但要分清测什么：</p>
+<ul>
+<li><strong>替身能测的</strong>：你的代码怎么处理各种响应 —— 重试逻辑、JSON 解析、限流退避、错误分类、状态机流转。<strong>这才是你自己写的代码。</strong></li>
+<li><strong>替身不能测的</strong>：接口本身变了、模型输出质量下降、签名算法过时。</li>
+</ul>
+<p>后者需要<strong>少量</strong>的真实验证（我留了一个「手动跑一次」的脚本，发版前跑）。<strong>把两者分开，别用真实调用来测自己的代码</strong> —— 那既贵又慢，而且不稳定。</p>
+<p><strong>二、「手写替身不如用 mock 库」</strong></p>
+<p>mock 库适合「验证函数被调用」，我需要的是「验证我怎么处理返回值」。手写的是<strong>数据结构</strong>而不是<strong>打桩</strong>，读起来更像真实场景：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">FakeSession([FakeResponse(</span><span style="color:#79B8FF">429</span><span style="color:#E1E4E8">), FakeResponse(</span><span style="color:#79B8FF">200</span><span style="color:#E1E4E8">, {</span><span style="color:#9ECBFF">"ok"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">True</span><span style="color:#E1E4E8">})])</span></span></code></pre>
+<p>一眼能看出「第一次限流、第二次成功」。用 mock 库写同样的场景要铺三四行 <code>side_effect</code>。</p>
+<p><strong>什么时候该换 mock 库</strong>：需要断言调用次数、参数精确匹配、或者要 patch 掉全局函数时。我这两处都没有。</p>
+<hr><div class="callout"><span aria-hidden="true"><svg class width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4l1.9 5.2 5.2 1.9-5.2 1.9L12 17.6l-1.9-5.2L4.9 10.5l5.2-1.9z"/></svg></span><div><b>如果你也遇到类似问题</b><br>我会继续把桌面工具和自动化开发中遇到的坑记在<a href="/blog">笔记</a>里。 有不同做法或想聊实现细节，可以写信到 <a href="mailto:maaikk@126.com">maaikk@126.com</a>。</div></div></article><aside class="side"><div class="card"><span class="eyebrow">本页目录</span><nav class="toc" style="margin-top:.9rem" aria-label="文章目录"><a href="#第一层伪造-http-层" style>第一层：伪造 HTTP 层</a><a href="#第二层合成素材" style>第二层：合成素材</a><a href="#第三层确定性" style>第三层：确定性</a><a href="#三层叠起来之后" style>三层叠起来之后</a><a href="#两个可能被质疑的点" style>两个可能被质疑的点</a></nav></div><div class="card"><span class="eyebrow">联系</span><p style="margin:.7rem 0 1rem">看到错别字、想讨论实现细节，都欢迎直接找我 —— 点一下就是复制。</p><div class="stack gap-sm"><button class="btn btn--sm" type="button" data-copy="maaikk@126.com"><svg class width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.6"/><path d="M4 7.8l8 5.4 8-5.4"/></svg>maaikk@126.com</button><button class="btn btn--sm" type="button" data-copy="M2XWYMM"><svg class width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.3 3.4C5.8 3.4 3 5.7 3 8.5c0 1.5.9 2.9 2.3 3.8l-.7 1.9 2.3-1.1c.6.2 1.4.3 2.2.4"/><path d="M21 13.5c0-2.4-2.4-4.3-5.4-4.3s-5.4 1.9-5.4 4.3 2.4 4.3 5.4 4.3c.7 0 1.4-.1 2-.4l2 1-.6-1.7c1.2-.8 2-2 2-3.2z"/><path d="M13.2 12.6h.01M17.8 12.6h.01M7.4 7.8h.01M11.2 7.8h.01"/></svg>微信 M2XWYMM</button><button class="btn btn--sm" type="button" data-copy="920422927"><svg class width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 11.9c0 4-3.8 7.2-8.5 7.2-1 0-2-.1-2.9-.4l-4 1.7 1.2-3.4c-1.2-.9-1.9-2.6-1.9-5.1 0-4 3.8-7.2 8.5-7.2s7.6 3.2 7.6 7.2z"/><path d="M8.6 10.6h.01M15.6 10.6h.01"/></svg>QQ 920422927</button></div></div></aside></div></div></main><footer class="foot"><div class="wrap foot__grid"><div class="stack gap-xs"><span class="mono faint">© 2026 颐安 · 湖北武汉 · 用 Astro 构建</span><span class="mono faint">不接广告，也没放统计脚本。</span></div><nav class="foot__links" aria-label="联系方式与订阅"><a href="https://github.com/0Sun-shine0" target="_blank" rel="me noopener"><svg class width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6a9.4 9.4 0 0 0-3 18.3c0-.5 0-1.3 0-2.2-2.6.6-3.2-1.2-3.2-1.2-.4-1.1-1-1.4-1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.7-1.4-2.1-.2-4.3-1.1-4.3-4.6 0-1 .4-1.9 1-2.6-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.6 1a8.7 8.7 0 0 1 4.6 0c1.8-1.3 2.6-1 2.6-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.6 0 3.5-2.2 4.4-4.3 4.6.4.4.8 1.1.8 2.1 0 1.6 0 2.8 0 3.2A9.4 9.4 0 0 0 12 2.6z"/></svg>GitHub</a><a href="/rss.xml"><svg class width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.6" cy="18.4" r="1.7"/><path d="M4 11.6a8.4 8.4 0 0 1 8.4 8.4M4 4.4A15.6 15.6 0 0 1 19.6 20"/></svg>RSS</a><button class="btn btn--sm" type="button" data-copy="maaikk@126.com" title="点击复制邮箱：maaikk@126.com"><svg class width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.6"/><path d="M4 7.8l8 5.4 8-5.4"/></svg>邮箱 maaikk@126.com</button><button class="btn btn--sm" type="button" data-copy="M2XWYMM" title="点击复制微信：M2XWYMM"><svg class width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.3 3.4C5.8 3.4 3 5.7 3 8.5c0 1.5.9 2.9 2.3 3.8l-.7 1.9 2.3-1.1c.6.2 1.4.3 2.2.4"/><path d="M21 13.5c0-2.4-2.4-4.3-5.4-4.3s-5.4 1.9-5.4 4.3 2.4 4.3 5.4 4.3c.7 0 1.4-.1 2-.4l2 1-.6-1.7c1.2-.8 2-2 2-3.2z"/><path d="M13.2 12.6h.01M17.8 12.6h.01M7.4 7.8h.01M11.2 7.8h.01"/></svg>微信 M2XWYMM</button><button class="btn btn--sm" type="button" data-copy="920422927" title="点击复制QQ：920422927"><svg class width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 11.9c0 4-3.8 7.2-8.5 7.2-1 0-2-.1-2.9-.4l-4 1.7 1.2-3.4c-1.2-.9-1.9-2.6-1.9-5.1 0-4 3.8-7.2 8.5-7.2s7.6 3.2 7.6 7.2z"/><path d="M8.6 10.6h.01M15.6 10.6h.01"/></svg>QQ 920422927</button></nav></div></footer><script type="module">(function(){var e=document.documentElement,t=window.matchMedia(`(prefers-reduced-motion: reduce)`).matches,n=`theme`;function r(t){e.setAttribute(`data-theme`,t);try{localStorage.setItem(n,t)}catch{}}function i(){var e=null;try{e=localStorage.getItem(n)}catch{}var t=window.matchMedia(`(prefers-color-scheme: light)`).matches;r(e||(t?`light`:`dark`))}i(),document.querySelectorAll(`[data-theme-toggle]`).forEach(function(t){t.addEventListener(`click`,function(){r(e.getAttribute(`data-theme`)===`dark`?`light`:`dark`)})});var a=document.querySelector(`.nav`);if(a){var o=function(){a.classList.toggle(`is-stuck`,window.scrollY>8)};o(),window.addEventListener(`scroll`,o,{passive:!0});var s=a.querySelector(`[data-burger]`);s&&s.addEventListener(`click`,function(){var e=a.classList.toggle(`is-open`);s.setAttribute(`aria-expanded`,String(e))}),a.querySelectorAll(`.nav__drawer a`).forEach(function(e){e.addEventListener(`click`,function(){a.classList.remove(`is-open`)})});var c=location.pathname.replace(/index\.html$/,``).replace(/\/$/,``)||`/`;a.querySelectorAll(`[data-nav]`).forEach(function(e){var t=new URL(e.href,location.origin).pathname.replace(/index\.html$/,``).replace(/\/$/,``)||`/`;(t===`/`?c===`/`:c.indexOf(t)===0)&&a.querySelectorAll(`[data-nav="`+e.dataset.nav+`"]`).forEach(function(e){e.setAttribute(`aria-current`,`page`)})})}var l=document.querySelectorAll(`[data-reveal]`);if(t||!(`IntersectionObserver`in window))l.forEach(function(e){e.classList.add(`is-in`)});else{l.length,l.forEach(function(e,t){e.style.setProperty(`--d`,t%6*80+`ms`)});var u=new IntersectionObserver(function(e){e.forEach(function(e){e.isIntersecting&&(e.target.classList.add(`is-in`),u.unobserve(e.target))})},{rootMargin:`0px 0px -8% 0px`,threshold:.08});l.forEach(function(e){u.observe(e)})}!t&&window.matchMedia(`(hover:hover)`).matches&&document.querySelectorAll(`.card`).forEach(function(e){e.addEventListener(`pointermove`,function(t){var n=e.getBoundingClientRect();e.style.setProperty(`--mx`,(t.clientX-n.left)/n.width*100+`%`),e.style.setProperty(`--my`,(t.clientY-n.top)/n.height*100+`%`)})});var d=document.createElement(`div`);d.className=`toast`,d.setAttribute(`role`,`status`),d.setAttribute(`aria-live`,`polite`),d.textContent=`已复制到剪贴板 `,document.body.appendChild(d);var f;function p(e){d.textContent=e||`已复制到剪贴板 `,d.classList.add(`is-show`),clearTimeout(f),f=setTimeout(function(){d.classList.remove(`is-show`)},1900)}if(document.querySelectorAll(`[data-copy]`).forEach(function(e){e.addEventListener(`click`,function(t){t.preventDefault();var n=e.getAttribute(`data-copy`),r=function(){p(`已复制：`+n)};if(navigator.clipboard&&location.protocol!==`file:`)navigator.clipboard.writeText(n).then(r).catch(function(){window.location.href=`mailto:`+n});else{var i=document.createElement(`textarea`);i.value=n,i.style.position=`fixed`,i.style.opacity=`0`,document.body.appendChild(i),i.select();try{document.execCommand(`copy`),r()}catch{window.location.href=`mailto:`+n}document.body.removeChild(i)}})}),document.body.hasAttribute(`data-progress`)){var m=document.createElement(`div`);m.className=`progress`,m.setAttribute(`aria-hidden`,`true`),document.body.appendChild(m);var h=function(){var e=document.documentElement.scrollHeight-window.innerHeight;m.style.width=(e>0?Math.min(100,window.scrollY/e*100):0)+`%`};h(),window.addEventListener(`scroll`,h,{passive:!0}),window.addEventListener(`resize`,h)}document.querySelectorAll(`[data-year]`).forEach(function(e){e.textContent=new Date().getFullYear()})})();</script></body></html>

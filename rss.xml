@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>颐安 的技术笔记</title>
+    <link>https://0sun-shine0.github.io/blog/</link>
+    <description>做出来的东西都真的能跑</description>
+    <language>zh-cn</language>
+    <atom:link href="https://0sun-shine0.github.io/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>让“渲染结果”当唯一真相，而不是再画一遍</title>
+      <link>https://0sun-shine0.github.io/blog/render-is-truth/</link>
+      <guid isPermaLink="true">https://0sun-shine0.github.io/blog/render-is-truth/</guid>
+      <description>透明窗口的点击区域、拖拽时的边框高亮、滚动时的卡片阴影  凡是要跟画面保持一致的东西，我在两个项目里都栽在同一件事上：把它描述了两遍。</description>
+      <pubDate>Fri, 02 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>一道题选哪个数：我踩过的三次「阈值」坑</title>
+      <link>https://0sun-shine0.github.io/blog/threshold-choices/</link>
+      <guid isPermaLink="true">https://0sun-shine0.github.io/blog/threshold-choices/</guid>
+      <description>分镜密度、细节强度、光流冻结  三个不同领域的问题，最后都归结成同一件事：挑一个数，然后说清它是怎么来的。挑数字比写算法难。</description>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>我写过两个「假指标」，直到它们骗了我自己</title>
+      <link>https://0sun-shine0.github.io/blog/fake-metrics/</link>
+      <guid isPermaLink="true">https://0sun-shine0.github.io/blog/fake-metrics/</guid>
+      <description>一个拿轮廓个数当物体检测、去跟关键词个数比大小；一个直方图相关系数低于 0.7 就报警。两个都跑得通、都看着合理，但都没有意义。附一个能说明问题的实测：同一张图与其压缩首帧的 SSIM 是 0.998，直方图相关系数却是 -0.0015。</description>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>我是怎么做出一个能双击安装的版本的</title>
+      <link>https://0sun-shine0.github.io/blog/one-command-installer/</link>
+      <guid isPermaLink="true">https://0sun-shine0.github.io/blog/one-command-installer/</guid>
+      <description>把 Python 桌面应用做成「双击、下一步、完成」，比写功能更容易漏细节。打包流水线、自己写的安装向导、会自删的卸载器，以及安装版和绿色版怎么共用一套程序。</description>
+      <pubDate>Sun, 27 Sep 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>确认次数和截图成本，最后是同一个问题</title>
+      <link>https://0sun-shine0.github.io/blog/screenshot-token-cost/</link>
+      <guid isPermaLink="true">https://0sun-shine0.github.io/blog/screenshot-token-cost/</guid>
+      <description>做桌面操作工具，体验一半卡在确认弹窗太多，一半卡在截图太贵 —— 而这两件事在成本上是同一件事。</description>
+      <pubDate>Fri, 25 Sep 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>我给桌面操作加的两道硬限制</title>
+      <link>https://0sun-shine0.github.io/blog/agent-approval-chain/</link>
+      <guid isPermaLink="true">https://0sun-shine0.github.io/blog/agent-approval-chain/</guid>
+      <description>小爪能操作键鼠、读文件、跑命令，所以有两个动作即使在「完全自动」下也要再问一次。为什么这么分，以及这类判断该写在审批链的第几行。</description>
+      <pubDate>Wed, 23 Sep 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>一条数据为什么会悄悄退回备份</title>
+      <link>https://0sun-shine0.github.io/blog/bom-data-loss/</link>
+      <guid isPermaLink="true">https://0sun-shine0.github.io/blog/bom-data-loss/</guid>
+      <description>待办没报错，却少了几条。查到是 UTF-8 BOM 让 json.load 抛了异常，程序又把它当成文件损坏、静默回退到备份 —— 数据看起来就「凭空少了」。</description>
+      <pubDate>Mon, 21 Sep 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>桌面宠物怎么做到“点得穿”</title>
+      <link>https://0sun-shine0.github.io/blog/pet-click-through/</link>
+      <guid isPermaLink="true">https://0sun-shine0.github.io/blog/pet-click-through/</guid>
+      <description>无边框透明窗口会整块吃掉鼠标事件 —— 点宠物旁边的「空气」，其实点在窗口上。我没在 Python 里重画一遍宠物形状，而是拿渲染结果的 alpha 通道去生成窗口遮罩。</description>
+      <pubDate>Fri, 18 Sep 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>测试怎么写才不花 API 钱</title>
+      <link>https://0sun-shine0.github.io/blog/api-cost-zero-tests/</link>
+      <guid isPermaLink="true">https://0sun-shine0.github.io/blog/api-cost-zero-tests/</guid>
+      <description>我做的项目几乎全依赖外部接口 —— 语言模型、视觉生成、视频合成。跑一次全量测试要烧掉几十块。后来用了三层替身，现在本地跑 294 个用例，一分钱不花。</description>
+      <pubDate>Sun, 18 May 2025 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>四种限流算法，我为什么选了最笨的那个</title>
+      <link>https://0sun-shine0.github.io/blog/rate-limiting-choice/</link>
+      <guid isPermaLink="true">https://0sun-shine0.github.io/blog/rate-limiting-choice/</guid>
+      <description>2024 年第一次做需要限流的项目，我把四种经典算法都抄了一遍，最后用了最简陋的固定窗口计数器。真实原因是：只有它我完全看得懂。</description>
+      <pubDate>Sun, 11 Aug 2024 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>从一道「字符串解码」看边界条件是怎么漏掉的</title>
+      <link>https://0sun-shine0.github.io/blog/boundary-conditions/</link>
+      <guid isPermaLink="true">https://0sun-shine0.github.io/blog/boundary-conditions/</guid>
+      <description>第一次认真刷算法题，思路三分钟就想出来，然后连挂四次。写得比较啰嗦，因为那时候我确实没想清楚，只想把过程记下来。</description>
+      <pubDate>Sat, 16 Mar 2024 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
