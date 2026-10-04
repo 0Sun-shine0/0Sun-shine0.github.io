@@ -512,3 +512,48 @@ html[data-theme="dark"] .ico-sun{display:none}
   content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:2px;
   background:var(--brand);transform:rotate(45deg);
 }
+
+/* 13 · 求职向：目标岗位 · */
+/* 放在首屏，让面试官第一眼知道「这个人想找什么工作」。 */
+.hero__job{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;
+  font-size:1rem;font-weight:600;letter-spacing:-.01em;
+}
+.hero__job b{color:var(--brand-2);font-weight:700}
+.job-tag{
+  display:inline-flex;align-items:center;gap:.4rem;flex:none;
+  padding:.3rem .68rem;border-radius:999px;font:600 .74rem/1 var(--mono);letter-spacing:.08em;
+  color:#08080c;background:var(--grad);
+}
+.job-card{
+  display:flex;flex-wrap:wrap;align-items:center;gap:1rem;justify-content:space-between;
+  width:100%;padding:1rem 1.15rem;border-radius:var(--radius);
+  border:1px solid var(--line);background:var(--panel);
+}
+.job-card__text{flex:1 1 30ch;min-width:16rem}
+.job-card__title{font-weight:650;letter-spacing:-.01em}
+.job-card__desc{color:var(--muted);font-size:.9rem;margin-top:.15rem}
+
+/* 14 · 真实界面截图 · */
+.shots{display:grid;gap:1rem;margin-top:1.4rem}
+.shots--2{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.shot{margin:0;display:flex;flex-direction:column;gap:.55rem}
+.shot img{
+  width:100%;height:auto;display:block;border-radius:calc(var(--radius) - 4px);
+  border:1px solid var(--line);background:var(--bg-soft);
+}
+.shot figcaption{font-size:.82rem;color:var(--faint);line-height:1.5}
+/* 单张宽图（T2Video 那种整窗截图）独占一行，别被拉成半宽 */
+.shots--wide{grid-template-columns:1fr}
+
+/* 15 · 可见的技术栈清单 · */
+/* 跑马灯上的技术词是 aria-hidden，读屏和抓正文的工具都拿不到，
+   这里再给一份正经的、可被读到和复制的文字版。 */
+.techgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1.1rem}
+.techgrid__group{display:flex;flex-direction:column;gap:.6rem}
+.techgrid__label{font:600 .74rem/1 var(--mono);color:var(--faint);letter-spacing:.12em;text-transform:uppercase}
+.techgrid__items{display:flex;flex-wrap:wrap;gap:.4rem}
+
+@media (max-width:640px){
+  .job-card{padding:.9rem 1rem}
+}

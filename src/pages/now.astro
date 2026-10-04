@@ -2,7 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
-const updated = '2026-09-28';
+// 这一页的数字和站点快照日一起改，日期只有 site.ts 一处来源，免得又漂成两个值
+const updated = site.metricsAsOf;
 ---
 <BaseLayout
   title="现在"
@@ -32,9 +33,9 @@ const updated = '2026-09-28';
         <h2>T2Video 重构</h2>
         <ul>
           <li>单文件拆成 8 个模块，分镜、接口、拼接、验证各归各位，改一处不用在两千行里跳。</li>
-          <li>补了 <b>230 个测试函数、303 条断言</b>，网络请求全走伪造会话，跑测试不花 API 钱。</li>
+          <li>补了 <b>230 个测试函数、306 条断言</b>，网络请求全走伪造会话，跑测试不花 API 钱。</li>
           <li>「看起来像验证」的部分换成 6 项能算出来的指标，依赖文件也重新理了一遍。</li>
-          <li>修掉 <b>8 个</b>会影响实际使用的毛病，其中一个最离谱：启动时会把系统临时目录里超过 24 小时的文件删掉。</li>
+          <li>修掉 <b>6 个</b>会影响实际使用的毛病，其中一个最离谱：启动时会把系统临时目录里超过 24 小时的文件删掉。</li>
         </ul>
 
         <h2>顺手做的基础工作</h2>

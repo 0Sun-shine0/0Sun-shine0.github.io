@@ -31,6 +31,19 @@ import { featured, projects, followedProjects, site } from '../data/site';
           <h2 style="font-size:clamp(1.35rem,2.7vw,1.95rem);margin-bottom:.6rem">{p.title}</h2>
           <p>{p.summary}</p>
 
+          <!-- 真实界面截图（由项目自带的截图脚本离屏生成） -->
+          {p.shots ? (
+            <div class={`shots ${p.shots.length > 1 ? 'shots--2' : 'shots--wide'}`}>
+              {p.shots.map((s) => (
+                <figure class="shot">
+                  <img src={s.src} alt={s.alt} width={s.w} height={s.h}
+                       loading="lazy" decoding="async" />
+                  <figcaption>{s.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          ) : null}
+
           <div class="case" style="margin-top:1.3rem">
             <div class="case__row">
               <span class="case__key">起因</span>

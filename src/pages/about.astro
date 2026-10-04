@@ -31,6 +31,10 @@ const concerns = [
       <p class="lead">
         在武汉，平时用 Python 写桌面工具，最近在学 AI Agent。
       </p>
+      <p class="hero__job" style="margin-top:.3rem">
+        <span class="job-tag">求职中</span>
+        目标岗位：<b>{site.jobTarget}</b>
+      </p>
     </div>
   </section>
 
@@ -115,6 +119,9 @@ const concerns = [
             点一下就是复制。
           </p>
           <div class="stack gap-sm">
+            <a class="btn btn--sm" href={site.resume} download>
+              <Icon name="file" size={14} />下载简历 PDF
+            </a>
             <a class="btn btn--sm" href={site.github} target="_blank" rel="me noopener">
               <Icon name="github" size={14} />@0Sun-shine0
             </a>
