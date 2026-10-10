@@ -95,6 +95,28 @@ export const featured = [
     metrics: ['v2.4.0', '两周 88 次提交', '2.1 万行应用代码', '运行依赖只有 1 个'],
     tags: ['Python', 'PySide6', 'Qt Quick / QML', 'PyInstaller'],
     link: 'https://github.com/0Sun-shine0/PawPet',
+    // 动图：真实界面录制 —— 同一套离屏抓帧脚本按固定间隔连续抓帧再合成，
+    // 不是画出来的示意。第一条是首屏主视觉（横图，与界面截图并排更整）；
+    // 第二条是宠物本体（透明底，所以标 plain）。
+    anims: [
+      {
+        src: '/shots/pawpet-approval-flow.gif',
+        still: '/shots/pawpet-approval-flow-still.webp',
+        w: 640,
+        h: 454,
+        alt: '小爪在点击鼠标前弹出审批卡片请求确认，点「允许这一次」后卡片收起、操作继续',
+        caption: '审批流程：动你的电脑之前先问一句（动图，约 3 秒）',
+      },
+      {
+        src: '/shots/pawpet-pet.gif',
+        still: '/shots/pawpet-pet-still.webp',
+        w: 200,
+        h: 184,
+        plain: true,
+        alt: '桌面宠物 mochi 的空闲动画：呼吸、甩尾、眨眼，头顶显示本轮专注进度',
+        caption: '宠物本体：呼吸、甩尾、眨眼，头顶那圈是本轮专注进度（动图）',
+      },
+    ],
     // 真实界面截图：由仓库自带的 tools/preview.py 与 tools/aipreview.py
     // 以真实渲染管线离屏生成，不是手绘示意图。重新出图见 README「截图」一节。
     shots: [
@@ -144,6 +166,20 @@ export const featured = [
     metrics: ['2207 行 → 8 个模块', '294 个测试用例', '306 条断言', '修掉 6 个问题'],
     tags: ['Python', 'DeepSeek API', '火山视觉 API', 'OpenCV'],
     link: 'https://github.com/0Sun-shine0/T2Video-DCOT',
+    // 动图：依次选中 4 个分镜，右下提示词随之切换。
+    // 注意看每一镜的提示词末尾都带着「延续前一镜的××」—— 这就是链式上下文，
+    // 不是示意动画，是真实交互录制。
+    // 真实的成片需要 火山视觉 API（付费），这里没法生成，所以没有放成片演示。
+    anims: [
+      {
+        src: '/shots/t2video-chain.gif',
+        still: '/shots/t2video-chain-still.webp',
+        w: 640,
+        h: 396,
+        alt: '依次选中四个分镜，右下角的图像与视频提示词随之切换，每一镜都带着上一镜已定的主体与场景',
+        caption: '逐镜装配提示词：每镜都继承上一镜的主体与场景（动图，约 2 秒）',
+      },
+    ],
     shots: [
       {
         src: '/shots/t2video-board.webp',

@@ -11,6 +11,7 @@ const year = new Date().getFullYear();
     </div>
 
     <nav class="foot__links" aria-label="联系方式与订阅">
+      <a href={site.resume} download><Icon name="file" size={15} />简历 PDF</a>
       <a href={site.github} target="_blank" rel="me noopener"><Icon name="github" size={15} />GitHub</a>
       <a href="/rss.xml"><Icon name="rss" size={15} />RSS</a>
       {contacts.map((c) => (

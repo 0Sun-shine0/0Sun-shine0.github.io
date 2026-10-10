@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
+import Anim from '../components/Anim.astro';
 import { featured, projects, followedProjects, site } from '../data/site';
 ---
 <BaseLayout
@@ -30,6 +31,13 @@ import { featured, projects, followedProjects, site } from '../data/site';
 
           <h2 style="font-size:clamp(1.35rem,2.7vw,1.95rem);margin-bottom:.6rem">{p.title}</h2>
           <p>{p.summary}</p>
+
+          <!-- 动图（真实交互录制）优先，静态截图跟在后面 -->
+          {p.anims ? (
+            <div class="anims anims--auto">
+              {p.anims.map((a) => <Anim anim={a} />)}
+            </div>
+          ) : null}
 
           <!-- 真实界面截图（由项目自带的截图脚本离屏生成） -->
           {p.shots ? (

@@ -1,0 +1,29 @@
+---
+/**
+ * 动图（GIF）。
+ *
+ * 用 <picture> 而不是直接 <img>：开了「减少动态效果」的访客会命中
+ * prefers-reduced-motion 那条 source，只下到静态帧，GIF 根本不下载 ——
+ * 既省流量，也避免自动播放的循环动画晃到人。GIF 本身没法用 CSS 暂停，
+ * 这是纯 HTML 的解法，不需要 JS。
+ */
+interface Anim {
+  src: string;
+  still?: string;
+  w: number;
+  h: number;
+  alt: string;
+  caption?: string;
+  plain?: boolean;
+}
+interface Props { anim: Anim }
+const { anim } = Astro.props;
+---
+<figure class={`anim${anim.plain ? ' anim--plain' : ''}`}>
+  <picture>
+    {anim.still ? <source srcset={anim.still} media="(prefers-reduced-motion: reduce)" /> : null}
+    <img src={anim.src} alt={anim.alt} width={anim.w} height={anim.h}
+         loading="lazy" decoding="async" />
+  </picture>
+  {anim.caption ? <figcaption>{anim.caption}</figcaption> : null}
+</figure>

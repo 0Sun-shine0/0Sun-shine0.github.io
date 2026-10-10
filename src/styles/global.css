@@ -557,3 +557,37 @@ html[data-theme="dark"] .ico-sun{display:none}
 @media (max-width:640px){
   .job-card{padding:.9rem 1rem}
 }
+
+/* 16 · 动图（GIF）· */
+/* 动图统一走 <picture>：开了「减少动态效果」的访客只会下到静态帧，
+   GIF 本身不会被下载。所以这里两种元素长得一样，只换内容。 */
+.anims{display:grid;gap:1rem;margin-top:1.4rem}
+.anims--auto{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.anim{margin:0;display:flex;flex-direction:column;gap:.55rem}
+.anim img{
+  width:100%;height:auto;display:block;border-radius:calc(var(--radius) - 4px);
+  border:1px solid var(--line);background:var(--bg-soft);
+}
+.anim figcaption{font-size:.82rem;color:var(--faint);line-height:1.5}
+/* 透明底的动图（宠物）：不加边框底色，居中放着就行 */
+.anim--plain img{
+  width:auto;max-width:min(100%,220px);margin-inline:auto;
+  border:0;background:none;
+}
+
+/* 17 · 导航栏的简历入口 · */
+/* 首页有下载入口，但访客滚到一半想拿简历时不该再找回去，所以导航栏常驻一个。 */
+.nav__resume{
+  display:inline-flex;align-items:center;gap:.42rem;height:38px;padding:0 .82rem;
+  border-radius:10px;border:1px solid transparent;background:var(--grad);
+  color:#08080c;font:650 .84rem/1 var(--sans);letter-spacing:-.01em;white-space:nowrap;
+  box-shadow:var(--shadow-pop);
+  transition:transform .3s var(--ease),filter .3s;
+}
+.nav__resume:hover{transform:translateY(-1px);filter:brightness(1.07)}
+.nav__resume svg{width:15px;height:15px;flex:none}
+@media (max-width:640px){
+  /* 小屏只留图标，别把导航挤爆 */
+  .nav__resume{width:38px;padding:0;justify-content:center}
+  .nav__resume__text{display:none}
+}

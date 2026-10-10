@@ -21,6 +21,12 @@ const isCurrent = (href: string) =>
     </nav>
 
     <div class="nav__actions">
+      <!-- 简历常驻导航栏：首页也有入口，但访客滚到一半想拿简历时不该再找回去 -->
+      <a class="nav__resume" href={site.resume} download
+         aria-label="下载简历 PDF" title="下载简历 PDF">
+        <Icon name="file" size={15} />
+        <span class="nav__resume__text">简历</span>
+      </a>
       <button class="icon-btn" type="button" data-theme-toggle
               aria-label="切换深浅色模式" title="切换深浅色模式">
         <Icon name="sun" size={17} cls="ico-sun" />
@@ -40,6 +46,7 @@ const isCurrent = (href: string) =>
         {navItems.map((item) => (
           <li><a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a></li>
         ))}
+        <li><a href={site.resume} download>下载简历 PDF</a></li>
       </ul>
     </div>
   </div>
